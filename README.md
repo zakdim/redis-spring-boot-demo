@@ -20,7 +20,7 @@ chmod +x redisinsight-linux64-<version>
 ./redisinsight-linux64-<version>
 ```
 
-To access your RedisInsight GUI, open a web browser and navigate to http://127.0.0.1:8001.
+To access your RedisInsight GUI, open a web browser and navigate to http://127.0.0.1:8001
 
 * Run RedisSpringBootDemoApplication or UserRepositoryTest in debug mode
 

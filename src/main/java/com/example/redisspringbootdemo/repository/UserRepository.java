@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Slf4j
@@ -26,11 +27,15 @@ public class UserRepository {
     }
 
     public User get(String userId) {
-        return (User) hashOperations.get("USER", userId);
+        User user = (User) hashOperations.get("USER", userId);
+        log.info("Retrieved user with ID {}: {}", userId, user);
+        return user;
     }
 
     public Map<String, User> getAll(){
-        return hashOperations.entries("USER");
+        Map<String, User> entries = hashOperations.entries("USER");
+        log.info("Retrieved all User entries: {}", entries);
+        return entries;
     }
 
     public void update(User user) {
@@ -38,8 +43,8 @@ public class UserRepository {
         log.info("User with ID {} updated", user.getUserId());
     }
 
-    public void delete(String userId) {
-        hashOperations.delete("USER", userId);
-        log.info("User with ID {} deleted", userId);
+    public void delete(String... userIds) {
+        hashOperations.delete("USER", userIds);
+        log.info("Users with IDs ({}) deleted", Arrays.asList(userIds));
     }
 }
